@@ -1,0 +1,11 @@
+.app-navigtion,
+.app-footer,
+.app-main {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.app-navigtion p {
+    text-align: center;
+}
