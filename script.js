@@ -6,15 +6,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const taskSearch = document.querySelector('.task-search');
     let textareaValue = null;
 
-
     textarea.addEventListener('change', function (event) {
         textareaValue = event.target.value
-        textarea.value = '';
+
     });
 
     addTask.addEventListener('click', function (event) {
         event.preventDefault();
-        createTask(textareaValue);
+        if (textareaValue !== null) {
+            createTask(textareaValue);
+            textarea.value = '';
+        };
 
     });
     function createTask(textareaValue) {
@@ -24,23 +26,21 @@ document.addEventListener('DOMContentLoaded', function () {
         const taskItemContent = document.createElement('div');
         taskItemContent.classList.add('task-item-content');
         taskItemContent.innerText = textareaValue;
-        const taskItemDelete = document.createElement('button');
+        const taskItemDelete = document.createElement('div');
         taskItemDelete.classList.add('task-item-delete');
-        taskItemDelete.innerText = 'Delete'
+        taskItemDelete.innerHTML = '<i class="fas fa-trash-alt"></i>';
         taskContainer.appendChild(taskItem);
         taskItem.appendChild(taskItemContent);
         taskItem.appendChild(taskItemDelete);
 
     };
 
-
     taskContainer.addEventListener('click', function (event) {
         if (event.target.closest('.task-item-delete') !== null) {
             event.target.closest('.task-item').remove();
         }
-
-
     });
+
     taskSearch.addEventListener('input', function () {
         const val = this.value;
         const elems = taskContainer.querySelector('.task-item');
@@ -57,4 +57,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-})
+});
